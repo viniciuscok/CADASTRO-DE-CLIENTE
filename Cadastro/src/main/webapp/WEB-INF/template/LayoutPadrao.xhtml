@@ -1,0 +1,62 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title><ui:insert name="titulo">Sistema de Cadastro de Usuário</ui:insert></title>
+	<h:outputStylesheet library="css" name="sistema.css"/>
+</h:head>
+<body> 
+	<header>
+		<DIV style="float: left; margin-left: 8px">
+			<SPAN style="float: right; height: 30px; line-height: 30px; margin-left:400px">
+				Usuário: vinicius
+			</SPAN>
+		
+			<h:form style="display: inline-block">
+				<p:menubar styleClass="menu-sistema">
+					<p:submenu label="Cadastros">
+						<p:menuitem value="Cliente" outcome="/clientes/CadastroCliente"/>
+						<p:menuitem value="Usuário" outcome="/usuarios/CadastroUsuario"/>
+						<p:menuitem value="Grupo" 	outcome="/grupos/CadastroGrupo"/>
+					</p:submenu>
+					<p:submenu label="Consultas">
+						<p:menuitem value="Clientes" outcome="/clientes/PesquisaClientes"/>
+						<p:menuitem value="Usuarios" outcome="/usuarios/PesquisaUsuarios"/>
+					</p:submenu>
+					<p:submenu label="Pedidos">
+						<p:menuitem value="Novo pedido" outcome="/pedidos/CadastroPedido"/>
+					</p:submenu>
+				</p:menubar>
+			</h:form>
+			
+		</DIV>
+		
+		<DIV style="float: right; margin-right: 0px">
+			<h:link outcome="/Home">
+				<h:graphicImage library="images" name="logo22.png" style="margin-top:-3px" height="40px" width="170px"/>
+			</h:link>
+		</DIV>
+		<DIV style="clear: both;"></DIV>
+	
+	</header>
+	
+	<DIV id="conteudo">
+		<ui:insert name="corpo"/>
+	</DIV>
+	
+	<p:separator style="margin-top: 20px"/>
+	
+	<footer>
+		<p>FastReparo Sistemas <BR />
+			Tel:(75) 4101-1332 <BR />
+			   (75) 99189-7832 </p>
+	</footer>
+	
+	
+</body> 
+</html>

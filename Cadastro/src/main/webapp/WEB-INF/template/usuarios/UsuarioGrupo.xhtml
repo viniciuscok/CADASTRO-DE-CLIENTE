@@ -1,0 +1,50 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<p:panelGrid columns="2" style="width:100%; margin-top:-1px" columnClasses="rotulo, campo">
+		<p:outputLabel value="Grupo" for="nomeGrupo"/>
+	
+		<h:panelGroup>
+			<h:panelGrid columns="2">
+				<p:selectOneMenu style="width: 150px" id="nomeGrupo" value="#{cadastroUsuarioBean.grupoSelecionado}">
+					<f:selectItem itemLabel="Selecione"/>
+					<f:selectItems value="#{cadastroUsuarioBean.gruposRaizes}" var="grupo"
+							itemLabel="#{grupo.nome}" itemValue="#{grupo}"/>					
+					
+				</p:selectOneMenu>
+				<p:commandButton value="Adicionar" process="@this nomeGrupo" update="tabelaGrupo" 
+						action="#{cadastroUsuarioBean.adicionarGrupo}"/>
+			</h:panelGrid>
+		</h:panelGroup>
+	</p:panelGrid>
+
+	<p:dataTable style="margin-top:20px" id="tabelaGrupo" value="#{cadastroUsuarioBean.usuario.grupos}" var="grupo"
+			paginator="true" paginatorPosition="bottom" rows="10" sortOrder="ascending" rowsPerPageTemplate="10,20,30,40">
+		<p:column headerText="Grupo" width="200">
+			<h:outputText value="#{grupo.nome}" />
+		</p:column>
+		
+		<p:column headerText="Descrição">
+			<h:outputText value="#{grupo.descricao}"/>
+		</p:column>
+		
+		<p:column headerText="remover" style="text-align:center" width="50">
+			<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="PF('excluirGrupo').show()" 
+					process="@this" update=":formCadastroUsuario:dialogExcluirGrupo">
+				<f:setPropertyActionListener value="#{grupo}" target="#{cadastroUsuarioBean.removerGrupoSelecionado}"></f:setPropertyActionListener>
+			</p:commandButton>
+		</p:column>
+	</p:dataTable>
+	
+	<p:confirmDialog id="dialogExcluirGrupo" header="Excluir Grupo?" message="Tem certeza que deseja excluir esse Grupo?" 
+				widgetVar="excluirGrupo">
+		<p:button value="não" onclick="PF('excluirGrupo').hide();return false"/>
+		<p:commandButton value="Sim" oncomplete="PF('excluirGrupo').hide()" action="#{cadastroUsuarioBean.removerGrupo}"
+				process="@this" update=":formCadastroUsuario:tabelaGrupo" />		
+	</p:confirmDialog>
+
+</ui:composition>

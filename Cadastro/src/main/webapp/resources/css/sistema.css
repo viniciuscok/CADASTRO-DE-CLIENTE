@@ -1,0 +1,72 @@
+@charset "utf-8";
+
+body
+{
+	background: #f9f9f9;
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+	margin:0px;
+	font-weight: normal;	
+}
+
+header
+{
+	padding: 5px, 0px;
+	margin-bottom: 20px;
+	height: 40px;
+	background-color: #2b5788;
+	color: white;
+	box-shadow: 0px 2px 2px #ccc;	
+}
+
+header > div
+{
+	margin-right: 8px;
+	margin-top: 3px;
+}
+
+footer
+{
+	text-align: center;
+	color: black;
+	font: bold;
+	font-size: 14px;
+	
+	
+}
+
+#conteudo
+{
+	padding: 0px 8px;
+	
+}
+
+.rotulo
+{
+	width: 150px;
+}
+
+.ui-panelgrid td
+{
+	height: 34px;
+	
+}
+
+
+.menu-sistema
+{
+	border: 0px !important;
+	padding: 0px !important;
+	background: none !important;
+}
+
+.menu-sistema .ui-menu-parent > a .ui-menuitem-text, .menu-sistema > .ui-menu-list > .ui-menuitem > a > .ui-menuitem-text 
+{
+    color: #ffffff !important;
+}
+
+.menu-sistema .ui-icon-triangle-1-s 
+{
+    background: url(#{resources['images:seta-para-baixo.png']}) no-repeat;
+    
+}

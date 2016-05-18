@@ -1,0 +1,71 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<ui:define name="titulo">Consultar Usuário</ui:define>
+	<ui:define name="corpo">
+		<h1>Consultar Usuário</h1>
+		<h:form id="formPesquisaUsuario">
+			<p:toolbar style="margin-top:20px">
+				<p:toolbarGroup>
+					<p:commandButton value="Pesquisar" action="#{pesquisaUsuariosBean.pesquisar}" update="@form"/>
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Novo" outcome="/usuarios/CadastroUsuario"/>
+				</p:toolbarGroup>
+			</p:toolbar>
+			
+			<p:panelGrid columns="2" style="width: 100%; margin-top:20px" columnClasses="rotulo, campo" >
+				<p:outputLabel value="Nome" for="nome"/>
+				<p:inputText id="nome" size="70" value="#{pesquisaUsuariosBean.usuario.nome}"/>
+				
+				<p:outputLabel value="E-mail" for="email"/>
+				<p:inputText id="email" size="60"/>
+				
+			</p:panelGrid>
+			
+			<p:dataTable id="tabelaPesquisaUsuario" value="#{pesquisaUsuariosBean.buscarUsuarios}" var="usuario" paginator="true" rows="10"
+					rowsPerPageTemplate="10,20,30,40" paginatorPosition="bottom">
+				
+				<p:column headerText="Código" width="40">
+					<h:outputText value="#{usuario.codigo}"/>
+				</p:column>	
+				
+				<p:column headerText="Nome" >
+					<h:outputText value="#{usuario.nome}"/>
+				</p:column>	
+				
+				<p:column headerText="E-mail" width="300">
+					<h:outputText value="#{usuario.email}"/>
+				</p:column>	
+				
+				<p:column headerText="Grupo" width="300">
+					<p:selectOneMenu>
+						<f:selectItems value="#{usuario.grupos}" var="grupo"
+							itemLabel="#{grupo.nome}"/>
+					</p:selectOneMenu>
+					<h:outputText value="#{usuario.grupos.get(all).nome}"/>
+				</p:column>	
+				
+				<p:column headerText="Ações" style="text-align:center" width="80">
+					<p:button icon="ui-icon-pencil" outcome="/usuarios/CadastroUsuario" title="Alterar">
+						<f:param name="usuario" value="#{usuario.codigo}"/>
+					</p:button>
+					<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="PF('excluirUsuario').show();"/>
+				</p:column>	
+			</p:dataTable>
+			
+			<p:confirmDialog header="Excluir Usuário" message="Tem certeza que deseja excluir o Usuário?" 
+					widgetVar="excluirUsuario">
+				
+				<p:button value="Não" onclick="PF('excluirUsuario').hide(); return false;"/>
+				<p:commandButton value="Sim" oncomplete="PF('excluirUsuario').hide();"/>	
+			</p:confirmDialog>
+			
+			
+		</h:form>
+	</ui:define>
+</ui:composition>
